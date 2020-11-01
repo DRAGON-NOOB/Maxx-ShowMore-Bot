@@ -32,6 +32,15 @@ def only_chnls(event):
 
 
 @my_router.on(Filter(only_chnls) & (MessageText.Len >= CONSTANTS.TRUNC + 10))
+async def about_rout_hndlr(event):
+	sent_message = await event.client.send_message(entity = FULL_POSTS_CHNLD_ID, message = event.message)
+	data = short_url.encode_url(sent_message.id, min_length = 10)
+	await event.client.edit_message(entity = event.message.to_id, message = event.message.id,
+	                                 buttons = custom.Button.inline(text = "𝗦𝗵𝗼𝘄 𝗠𝗼𝗿𝗲>>", data = f"op_{data}_0_0"),
+	                                 text = Edit.create_trunc_text(event.message))
+
+
+@my_router.on(Filter(only_chnls) & (MessageText.Len >= CONSTANTS.TRUNC + 10))
 async def start_rout_hndlr(event):
 	sent_message = await event.client.send_message(entity = FULL_POSTS_CHNLD_ID, message = event.message)
 	data = short_url.encode_url(sent_message.id, min_length = 10)
