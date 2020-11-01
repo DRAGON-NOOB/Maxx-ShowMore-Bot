@@ -36,7 +36,7 @@ async def start_rout_hndlr(event):
 	sent_message = await event.client.send_message(entity = FULL_POSTS_CHNLD_ID, message = event.message)
 	data = short_url.encode_url(sent_message.id, min_length = 10)
 	await event.client.edit_message(entity = event.message.to_id, message = event.message.id,
-	                                 buttons = custom.Button.inline(text = "Show More>>", data = f"op_{data}_0_0"),
+	                                 buttons = custom.Button.inline(text = "𝗦𝗵𝗼𝘄 𝗠𝗼𝗿𝗲>>", data = f"op_{data}_0_0"),
 	                                 text = Edit.create_trunc_text(event.message))
 	raise events.StopPropagation
 	
@@ -59,7 +59,7 @@ async def pre_close_message(update):
 		
 		await update.client.edit_message(entity = update.query.peer,
 		                                 text = Edit.create_trunc_text(got_msg),
-		                                 buttons = custom.Button.inline(text = "Show More>>",
+		                                 buttons = custom.Button.inline(text = "𝗦𝗵𝗼𝘄 𝗠𝗼𝗿𝗲>>",
 		                                                                data = f"op_{code}_0_{int(views)+1}"),
 		                                 message = update.query.msg_id)
 
@@ -78,7 +78,7 @@ async def all_call_hndlr(update):
 		if action == "cl":
 			await update.client.edit_message(entity = update.query.peer,
 			                                 text = CONSTANTS.LOGO,
-			                                 buttons = custom.Button.inline(text = "Show More>>",
+			                                 buttons = custom.Button.inline(text = "𝗦𝗵𝗼𝘄 𝗠𝗼𝗿𝗲>>",
 			                                                                data = f"op_{code}_0_{views}"),
 			                                 message = update.query.msg_id)
 			if update.query.user_id == int(user_id):
@@ -86,12 +86,12 @@ async def all_call_hndlr(update):
 				got_msg = await update.client.get_messages(FULL_POSTS_CHNLD_ID, ids = message_id)
 				await update.client.edit_message(entity = update.query.peer,
 				                                 text = Edit.create_trunc_text(got_msg),
-				                                 buttons = custom.Button.inline(text = "Show More>>",
+				                                 buttons = custom.Button.inline(text = "𝗦𝗵𝗼𝘄 𝗠𝗼𝗿𝗲>>",
 				                                                                data = f"op_{code}_0_{views}"),
 				                                 message = update.query.msg_id)
 			else:
 				await update.answer("Someone else is reading this!", alert = True)
-				# TODO read me in Private, url = "t.me/ShowMore_Bot?start=xyz")
+				# TODO read me in Private, url = "t.me/MaxShowMoreBot?start=xyz")
 		elif action == "op":
 			await update.answer("Loading full version..,")
 			message_id = short_url.decode_url(code)
@@ -99,12 +99,12 @@ async def all_call_hndlr(update):
 			await update.client.edit_message(entity = update.query.peer,
 			                                 text = got_msg.text,
 			                                 buttons = [
-				                                 [custom.Button.inline(text = f"{views} Views 👁️‍🗨",
+				                                 [custom.Button.inline(text = f"{views} 👁️ 𝗩𝗜𝗘𝗪𝗦 👁️‍🗨",
 			                                                         data = f"vw_{code}_0_{views}"),
-                                         custom.Button.inline(text = "Close ❌",
+                                         custom.Button.inline(text = "𝗖𝗟𝗢𝗦𝗘? ⛔",
                                                               data = f"cl_{code}_{update.query.user_id}_{int(views)+1}")],
-                                         [custom.Button.url(text = "Created by ShowMore bot",
-                                                            url = 't.me/ShowMore_Bot')]],
+                                         [custom.Button.url(text = "👲 𝗗𝗘𝗩𝗟𝗢𝗣𝗘𝗥 👲",
+                                                            url = 't.me/MaxxRider')]],
 			                                 message = update.query.msg_id)
 			scheduler.add_job(pre_close_message, kwargs = {"update": update},
 												run_date = datetime.now()+timedelta(minutes = calculate_read_time(got_msg.raw_text)))
