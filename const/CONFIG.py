@@ -1,6 +1,6 @@
-BOT_TOKEN = '1111:ABCDE_fghijklm'
+BOT_TOKEN = 'Your Bot Token 🌝'
 
-API_ID = 0000
+API_ID = your API ID
 API_HASH = 'create_new_one'
 
 FULL_POSTS_CHNLD_ID = -100111
